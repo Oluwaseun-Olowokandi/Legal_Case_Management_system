@@ -1,0 +1,357 @@
+/* ==========================================
+   LEGAL CASE MANAGEMENT DASHBOARD STYLES
+   Corrected & Valid CSS for all dashboards
+   ========================================== */
+
+:root {
+  --primary-head: #0d6efd;
+  --primary-lawyer: #198754;
+  --primary-principal: #6f42c1;
+  --sidebar-bg: #1f2937;
+  --sidebar-hover: #374151;
+  --text: #212529;
+  --bg: #f4f6f9;
+  --white: #ffffff;
+  --border: #dee2e6;
+  --radius: 10px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease;
+}
+
+/* ===== Reset and Base ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: var(--sidebar-bg);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition);
+  z-index: 1000;
+}
+
+.sidebar-header {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sidebar-header i {
+  color: #ffc107;
+  font-size: 1.3rem;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.sidebar-menu a {
+  padding: 12px 25px;
+  color: #d1d5db;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+  background: var(--sidebar-hover);
+  color: #fff;
+}
+
+.sidebar-menu i {
+  width: 18px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.logout-btn {
+  margin: 20px;
+  padding: 10px 15px;
+  background: #dc3545;
+  border: none;
+  border-radius: var(--radius);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.logout-btn:hover {
+  background: #b02a37;
+}
+
+/* ===== Main Content ===== */
+.main-content {
+  margin-left: 240px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+/* ===== Header ===== */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+
+/* Role-specific header backgrounds */
+body[data-role="head"] .dashboard-header {
+  background: var(--primary-head);
+}
+
+body[data-role="lawyer"] .dashboard-header {
+  background: var(--primary-lawyer);
+}
+
+body[data-role="principal"] .dashboard-header {
+  background: var(--primary-principal);
+}
+
+.dashboard-header .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dashboard-header .logo i {
+  font-size: 1.3rem;
+}
+
+.dashboard-header h1 {
+  font-size: 1.2rem;
+}
+
+.dashboard-header .user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.sidebar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+/* ===== Dashboard Container ===== */
+.dashboard-container {
+  flex: 1;
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.toolbar h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3rem;
+  color: var(--text);
+}
+
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sort-controls label {
+  font-weight: 600;
+}
+
+.sort-controls select {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.sort-controls select:hover {
+  border-color: var(--primary-head);
+}
+
+/* ===== Table ===== */
+.case-list {
+  overflow-x: auto;
+  border-radius: var(--radius);
+}
+
+.case-list table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.case-list thead {
+  background: var(--primary-head);
+  color: #fff;
+}
+
+/* override thead color per role */
+body[data-role="lawyer"] .case-list thead {
+  background: var(--primary-lawyer);
+}
+
+body[data-role="principal"] .case-list thead {
+  background: var(--primary-principal);
+}
+
+.case-list th,
+.case-list td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.case-list th {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.case-list td {
+  font-size: 0.9rem;
+}
+
+.case-list tbody tr:hover {
+  background: #f1f3f5;
+  transition: background 0.2s ease;
+}
+
+/* ===== Status Badges ===== */
+.status {
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.status.ongoing {
+  background: rgba(13, 110, 253, 0.08);
+  color: #0d6efd;
+}
+
+.status.completed {
+  background: rgba(25, 135, 84, 0.08);
+  color: #198754;
+}
+
+/* keep both selectors for flexibility (classes used in different templates) */
+.status.view,
+.status.kept-in-view {
+  background: rgba(255, 193, 7, 0.08);
+  color: #ffc107;
+}
+
+/* ===== Footer ===== */
+footer {
+  background: var(--white);
+  text-align: center;
+  padding: 15px;
+  color: #666;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 900px) {
+  .sidebar {
+    left: -240px;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .sidebar-toggle {
+    display: block;
+  }
+
+  .dashboard-container {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  th,
+  td {
+    font-size: 0.85rem;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1rem;
+  }
+
+  .sort-controls select {
+    font-size: 0.85rem;
+  }
+}

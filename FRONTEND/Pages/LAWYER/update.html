@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Case Update — Legal Case Management</title>
+  <link rel="stylesheet" href="../../Assets/CSS/update.css">
+
+  <!-- Font Awesome for icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Pw6ZbOSz+E8uIM4j9Z4RZJCBSPxM2TgO3KPC6q+mYqS6CdlpTBlw5QknW2ItPZbIdHwU6h5T6c8sDw4XkJz1bQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <i class="fa-solid fa-scale-balanced"></i>
+      <span>Legal Case Management — Case Updates</span>
+    </div>
+
+    <div class="top-controls">
+      <label class="user-switch">
+        <i class="fa-solid fa-user"></i>
+        <select id="currentUser" title="Simulated user role">
+          <!-- populated in JS -->
+        </select>
+      </label>
+
+      <button id="notifyPermBtn" class="icon-btn" title="Enable reminders & browser notifications">
+        <i class="fa-regular fa-bell"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel narrow">
+      <h3><i class="fa-solid fa-folder-open"></i> Cases</h3>
+
+      <div class="search-group">
+        <div class="icon-input">
+          <i class="fa-solid fa-magnifying-glass input-icon"></i>
+          <input id="caseSearch" placeholder="Search by title / suit number" />
+        </div>
+      </div>
+
+      <div class="filters">
+        <label>
+          <i class="fa-solid fa-filter"></i> Status
+          <select id="filterStatus">
+            <option value="">All</option>
+            <option value="pre-litigation">Pre-litigation</option>
+            <option value="court">Court</option>
+            <option value="ongoing">Ongoing</option>
+            <option value="completed">Completed</option>
+            <option value="kept-in-view">Kept in view</option>
+          </select>
+        </label>
+
+        <label>
+          <i class="fa-solid fa-calendar-days"></i> Adjournment (within days)
+          <input type="number" id="filterAdjDays" min="0" placeholder="e.g., 7" />
+        </label>
+      </div>
+
+      <ul id="caseList" class="case-list" aria-live="polite"></ul>
+
+      <div class="status-counts">
+        <div><i class="fa-solid fa-hourglass-half"></i> Ongoing: <span id="count-ongoing">0</span></div>
+        <div><i class="fa-solid fa-check-circle"></i> Completed: <span id="count-completed">0</span></div>
+        <div><i class="fa-solid fa-eye"></i> Kept: <span id="count-kept">0</span></div>
+      </div>
+    </aside>
+
+    <section class="panel wide" id="detailPanel">
+      <div class="detail-header">
+        <div>
+          <h2 id="caseTitle">Select a case</h2>
+          <div class="meta">
+            <span id="caseNumberMeta"></span>
+            <span id="suitNumberMeta"></span>
+            <span id="caseStatusMeta" class="status-badge"></span>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="btnNewUpdate"><i class="fa-solid fa-plus"></i> Add Update</button>
+          <button id="btnViewReminders"><i class="fa-regular fa-bell"></i> Reminders</button>
+        </div>
+      </div>
+
+      <article id="caseOverview" class="card">
+        <h3><i class="fa-solid fa-info-circle"></i> Case Overview</h3>
+        <p id="caseDescription" class="muted">Case description will appear here.</p>
+
+        <div class="overview-grid">
+          <div><strong>Category</strong><div id="caseCategory"></div></div>
+          <div><strong>Subcategory</strong><div id="caseSubcategory"></div></div>
+          <div><strong>Date of Petition</strong><div id="casePetitionDate"></div></div>
+          <div><strong>Assigned By</strong><div id="caseAssignedBy"></div></div>
+        </div>
+      </article>
+
+      <article id="updateFormCard" class="card hidden">
+        <h3><i class="fa-solid fa-pen-to-square"></i> Add Case Update</h3>
+
+        <form id="updateForm" autocomplete="off">
+          <div class="form-row">
+            <label>Date of Update <span class="required">*</span></label>
+            <input type="date" id="updateDate" required />
+          </div>
+
+          <div class="form-row">
+            <label>Action Taken <span class="required">*</span></label>
+            <input type="text" id="actionTaken" placeholder="e.g., Filed motion to dismiss" required />
+          </div>
+
+          <div class="form-row">
+            <label>Current Position / Stage <span class="required">*</span></label>
+            <input type="text" id="currentPosition" placeholder="e.g., Preliminary hearing" required />
+          </div>
+
+          <div class="form-row">
+            <label>Status <span class="required">*</span></label>
+            <select id="updateStatus" required>
+              <option value="">Select status</option>
+              <option value="ongoing">Ongoing</option>
+              <option value="completed">Completed</option>
+              <option value="kept-in-view">Kept in view</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label>Suit Number (if changed)</label>
+            <input type="text" id="updateSuitNumber" placeholder="e.g., HCT/123/2025 — leave blank if unchanged" />
+          </div>
+
+          <div class="form-row">
+            <label>Adjournment Date (next hearing)</label>
+            <input type="date" id="adjournmentDate" />
+            <small class="hint">If status = Completed you cannot set a future adjournment date.</small>
+          </div>
+
+          <div class="form-row">
+            <label>Notes / Additional Info</label>
+            <textarea id="updateNotes" rows="3" placeholder="Optional contextual notes"></textarea>
+          </div>
+
+          <div class="form-row form-actions-row">
+            <button type="submit" class="primary"><i class="fa-solid fa-save"></i> Save Update</button>
+            <button type="button" id="cancelUpdate" class="secondary"><i class="fa-solid fa-xmark"></i> Cancel</button>
+          </div>
+
+          <div id="formErrors" class="form-errors" aria-live="assertive"></div>
+        </form>
+      </article>
+
+      <article class="card">
+        <h3><i class="fa-solid fa-history"></i> Update History</h3>
+
+        <div class="history-controls">
+          <div class="icon-input small">
+            <i class="fa-solid fa-magnifying-glass input-icon"></i>
+            <input id="historySearch" placeholder="Filter history by action / notes / user" />
+          </div>
+
+          <label>
+            From
+            <input type="date" id="historyFrom" />
+          </label>
+          <label>
+            To
+            <input type="date" id="historyTo" />
+          </label>
+
+          <label>
+            Sort
+            <select id="historySort">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+            </select>
+          </label>
+        </div>
+
+        <table class="history-table" id="historyTable" aria-live="polite">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Action Taken</th>
+              <th>Position</th>
+              <th>Status</th>
+              <th>Adjournment</th>
+              <th>Suit No.</th>
+              <th>By</th>
+              <th>When</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </article>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="../../Assets/JAVASCRIPT/update.js" defer></script>
+</body>
+</html>

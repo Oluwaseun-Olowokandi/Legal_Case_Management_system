@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup | Legal Case Management System</title>
+  <link rel="stylesheet" href="../../Assets/CSS/login.css">
+
+  <!-- ✅ Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body>
+  <main class="auth-container">
+    <div class="auth-card">
+      <h1><i class="fa-solid fa-scale-balanced"></i> Legal Case Management</h1>
+      <h2><i class="fa-solid fa-user-plus"></i> Create User Account</h2>
+
+      <form id="signupForm">
+        <div class="form-group icon-input">
+          <i class="fa-solid fa-id-badge input-icon"></i>
+          <input type="text" id="staffID" placeholder="Staff ID" required />
+        </div>
+
+        <div class="form-group icon-input">
+          <i class="fa-solid fa-user input-icon"></i>
+          <input type="text" id="firstName" placeholder="First Name" required />
+        </div>
+
+        <div class="form-group icon-input">
+          <i class="fa-solid fa-user input-icon"></i>
+          <input type="text" id="lastName" placeholder="Last Name" required />
+        </div>
+
+        <div class="form-group icon-input">
+          <i class="fa-solid fa-briefcase input-icon"></i>
+          <select id="designation" required>
+            <option value="">Select Designation</option>
+            <option value="Head of Chamber">Head of Chamber</option>
+            <option value="Lawyer">Lawyer</option>
+            <option value="Principal">Principal</option>
+          </select>
+        </div>
+
+        <div class="form-group icon-input password-field">
+          <i class="fa-solid fa-lock input-icon"></i>
+          <input type="password" id="password" placeholder="Password" required />
+          <i class="fa-solid fa-eye toggle-password" id="toggleSignupPassword"></i>
+        </div>
+
+        <button type="submit">
+          <i class="fa-solid fa-user-plus"></i> Create Account
+        </button>
+      </form>
+
+      <p class="note">
+        <i class="fa-solid fa-circle-exclamation"></i> Only the <strong>Head of Chamber</strong> can register new users.
+      </p>
+    </div>
+  </main>
+
+  <script src="../../Assets/JAVASCRIPT/login.js"></script>
+</body>
+</html>

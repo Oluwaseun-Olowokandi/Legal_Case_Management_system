@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lawyer Dashboard</title>
+  <link rel="stylesheet" href="../../Assets/CSS/dashboard.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+</head>
+<body data-role="lawyer">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <i class="fas fa-briefcase"></i>
+      <span>Lawyer Dashboard</span>
+    </div>
+    <nav class="sidebar-menu">
+      <a href="dashboard_lawyer.html" class="active"><i class="fas fa-home"></i> Dashboard</a>
+      <a href="case_creation.html"><i class="fas fa-folder-plus"></i> Case Creation</a>
+      <a href="case_update.html"><i class="fas fa-edit"></i> Case Update</a>
+    </nav>
+    <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="dashboard-header">
+      <button class="sidebar-toggle"><i class="fas fa-bars"></i></button>
+      <div class="logo">
+        <i class="fas fa-balance-scale"></i>
+        <h1>Legal Case Management</h1>
+      </div>
+      <div class="user-info">
+        <i class="fas fa-user-tie"></i>
+        <span>Lawyer</span>
+      </div>
+    </header>
+
+    <section class="dashboard-container">
+      <div class="toolbar">
+        <h2><i class="fas fa-folder-open"></i> Assigned Cases</h2>
+        <div class="sort-controls">
+          <label for="sort">Sort by:</label>
+          <select id="sort">
+            <option value="adjournment">Adjournment Date</option>
+            <option value="category">Case Category</option>
+            <option value="updated">Last Updated</option>
+            <option value="status">Case Status</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="case-list">
+        <table>
+          <thead>
+            <tr>
+              <th>Case Number</th>
+              <th>Client</th>
+              <th>Category</th>
+              <th>Adjournment Date</th>
+              <th>Last Updated</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="caseTable">
+            <tr>
+              <td>LCM003</td>
+              <td>John Smith</td>
+              <td>Family - Divorce</td>
+              <td>2025-11-18</td>
+              <td>2025-10-26</td>
+              <td><span class="status ongoing">Ongoing</span></td>
+            </tr>
+            <tr>
+              <td>LCM004</td>
+              <td>XYZ Ltd</td>
+              <td>Civil - Contract</td>
+              <td>2025-12-05</td>
+              <td>2025-10-27</td>
+              <td><span class="status view">Kept in View</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      &copy; 2025 Legal Case Management System — Lawyer Dashboard
+    </footer>
+  </main>
+
+  <script src="../../Assets/JAVASCRIPT/dashboard.js"></script>
+</body>
+</html>

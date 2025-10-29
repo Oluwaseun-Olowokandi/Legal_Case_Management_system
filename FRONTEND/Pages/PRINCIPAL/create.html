@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legal Case Creation Module</title>
+  <link rel="stylesheet" href="../../Assets/CSS/create.css">
+
+  <!-- ✅ Font Awesome Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Pw6ZbOSz+E8uIM4j9Z4RZJCBSPxM2TgO3KPC6q+mYqS6CdlpTBlw5QknW2ItPZbIdHwU6h5T6c8sDw4XkJz1bQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1><i class="fa-solid fa-scale-balanced"></i> Legal Case Management System</h1>
+      <p>Create a new case record with complete client and case details.</p>
+    </header>
+
+    <form id="caseForm" novalidate>
+      <!-- Core Case Information -->
+      <section class="form-section">
+        <h2><i class="fa-solid fa-briefcase"></i> Core Case Information</h2>
+
+        <div class="form-group icon-input">
+          <label for="caseNumber">Case Number <span class="required">*</span></label>
+          <i class="fa-solid fa-hashtag input-icon"></i>
+          <input type="text" id="caseNumber" name="caseNumber" placeholder="Auto-generated or enter manually" required />
+          <small class="hint">Must be unique for each case</small>
+        </div>
+
+        <div class="form-group icon-input">
+          <label for="complainants">Complainant Name(s) <span class="required">*</span></label>
+          <i class="fa-solid fa-user input-icon"></i>
+          <input type="text" id="complainants" name="complainants" placeholder="Enter complainant name(s)" required />
+          <small class="hint">Separate multiple names with commas</small>
+        </div>
+
+        <div class="form-group icon-input">
+          <label for="respondents">Respondent Name(s) <span class="required">*</span></label>
+          <i class="fa-solid fa-user-tie input-icon"></i>
+          <input type="text" id="respondents" name="respondents" placeholder="Enter respondent name(s)" required />
+          <small class="hint">Separate multiple names with commas</small>
+        </div>
+
+        <div class="form-group">
+          <label for="description"><i class="fa-solid fa-file-lines"></i> Description <span class="required">*</span></label>
+          <textarea id="description" name="description" rows="5" placeholder="Enter detailed case description..." required></textarea>
+        </div>
+
+        <div class="form-group inline">
+          <div class="icon-input">
+            <label for="category">Category <span class="required">*</span></label>
+            <i class="fa-solid fa-list input-icon"></i>
+            <select id="category" name="category" required>
+              <option value="">Select category</option>
+              <option value="civil">Civil</option>
+              <option value="criminal">Criminal</option>
+              <option value="family">Family</option>
+            </select>
+          </div>
+          <div class="icon-input">
+            <label for="subcategory">Sub-category <span class="required">*</span></label>
+            <i class="fa-solid fa-layer-group input-icon"></i>
+            <select id="subcategory" name="subcategory" required>
+              <option value="">Select sub-category</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group inline">
+          <div class="icon-input">
+            <label for="petitionDate">Date of Petition <span class="required">*</span></label>
+            <i class="fa-solid fa-calendar-days input-icon"></i>
+            <input type="date" id="petitionDate" name="petitionDate" required />
+          </div>
+          <div class="icon-input">
+            <label for="suitNumber">Suit Number</label>
+            <i class="fa-solid fa-scale-unbalanced input-icon"></i>
+            <input type="text" id="suitNumber" name="suitNumber" placeholder="Required when case goes to court" disabled />
+          </div>
+        </div>
+
+        <div class="form-group icon-input">
+          <label for="assignedBy">Assigned By <span class="required">*</span></label>
+          <i class="fa-solid fa-user-pen input-icon"></i>
+          <input type="text" id="assignedBy" name="assignedBy" placeholder="Enter name of assigning lawyer/staff" required />
+        </div>
+      </section>
+
+      <!-- Automated Billing -->
+      <section class="form-section">
+        <h2><i class="fa-solid fa-money-bill-wave"></i> Automated Billing</h2>
+        <div class="form-group icon-input">
+          <label for="billingAmount">Billing Amount</label>
+          <i class="fa-solid fa-coins input-icon"></i>
+          <input type="text" id="billingAmount" name="billingAmount" readonly placeholder="Auto-calculated based on category" />
+        </div>
+      </section>
+
+      <!-- Document Management -->
+      <section class="form-section">
+        <h2><i class="fa-solid fa-folder-open"></i> Document Management</h2>
+        <div class="form-group icon-input">
+          <label for="documents">Upload Documents</label>
+          <i class="fa-solid fa-upload input-icon"></i>
+          <input type="file" id="documents" name="documents" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" />
+          <small class="hint">You can upload multiple files (Max 10MB each)</small>
+          <ul id="uploadedList"></ul>
+        </div>
+      </section>
+
+      <!-- Submit -->
+      <div class="form-actions">
+        <button type="submit"><i class="fa-solid fa-check"></i> Create Case</button>
+      </div>
+    </form>
+  </main>
+
+  <footer>
+    <p><i class="fa-regular fa-copyright"></i> 2025 Legal Case Management System | Developed for internal use</p>
+  </footer>
+
+  <script src="../../Assets/JAVASCRIPT/create.js"></script>
+</body>
+</html>
